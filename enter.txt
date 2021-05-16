@@ -1,7 +1,185 @@
-OUTPUT "are we insane?"
-INPUT ans
-IF ans = "yes" THEN
-	OUTPUT "correct"
-ELSE
-	OUTPUT "incorrect"
-ENDIF
+#include<iostream> //pre-processor directives
+#include<fstream> //pre-processor directives
+#include<conio.h> //pre-processor directives
+
+using namespace std; //use std for all lines
+
+class Bank //set variable
+{
+		char name[30]; //initialize variable name
+		char accname[20]; //initialize variable account name
+		char acctype[20]; //initialize variable account type
+		float ibalance;   //initialize variable balance
+		float depos; //initalize variable deposit
+		float with; //intialize variable withdraw
+		int pass; //initialize variable password
+		
+	public:
+		void menu(void); //void function for menu
+		void createacc(void); //void function for create account
+		void deposit(void); //void function for deposit
+		void checkbal(void); //void function for check balance
+		void withdraw(void); //void function for withdraw
+		void info(void); //void function for account information
+};
+	void Bank::menu() //void function for menu
+	{
+		int num;
+	cout<<"\n Welcome to Team 5 Banking  System\n"; // Intro
+	cout<<"\n  Please choose your Option:(1 to 6)\n"<<endl; //display home page
+	cout<<"[1] Create An Account\n"; //create an account
+	cout<<"[2] Deposit the Balance\n"; //display deposit the balance
+	cout<<"[3] Check the Balance\n"; //display check the balance
+	cout<<"[4] Withdraw the Balance\n"; //display withdraw the balance
+	cout<<"[5] See All Information\n"; //display see all information
+	cout<<"[6] Exit"; //display exit
+	cout<<"\t\n";cin>>num;
+	switch(num)
+	{
+		case 1: //if option 1 is selected
+			createacc(); //void function create account is used
+			break; //end of case 1
+			
+		case 2: //if option 2 is selected
+			deposit(); //void function deposit is used
+			break; //end of case 2
+		
+		case 3: //if option 3 is selected
+			checkbal(); //void function check balance is used
+			break; //end of case 3
+			
+		case 4: //if option 4 is selected
+			withdraw(); //void function withdraw is used
+			break; //end of case 4
+		
+		case 5: //if option 5 is selected
+			info(); //void function account information is used
+			break; //end of case 5
+			
+		default: //if non of the options is selected
+			break;
+	}
+	
+	}
+	
+	void Bank::createacc() //void function for create account
+	{
+		int go; //initialize variable option
+		cout<<"\n\t\tEnter the Name of Depositer:"; //display Enter the name of the Depositer
+		cin>>name; //input name
+		cout<<"\n\t\tChoose The Account Name:"; //display choose the account name
+		cin>>accname; //input accname
+		cout<<"\n\t\tWhich types of Account You wanna Create?\n"; //display which type of account you wanna create?
+		cout<<"\t\t\t\t*Savings\n"; //display options
+		cout<<"\t\t\t\t*\n";
+		cout<<"\t\t\t\t*\n";
+		cout<<"\t\n\t";cin>>acctype; //input account type
+			cout<<"\n\t\tDeposit the Initial Balance:"; //display deposit the initial balance
+			cin>>ibalance; //input balance
+			cout<<"\n\t\tChoose your password[0-9] for secure (only 4 nos.):"; //display choose your password
+			cin>>pass; //input password
+			cout<<"\n\n\t\tAccount Has Been Successfully Created!!!\n\n"; //display account has been succesfully created
+		cout<<"\n\t\tHit \'0\' for Go to MainMenu:"; //display hit 0 to go to mainmenu
+			cin>>go; //input option
+			if(go==0) //if user input is 0
+			{
+				menu(); //return to menu
+			}
+	}
+	
+	void Bank::deposit() //void function for deposit
+	{
+		int go; //initialize variable option
+		cout<<"\n\t\tHow Much Money You wanna Deposit:\t"; //display how much money you wanna deposit
+		cin>>depos; //input deposit amount
+		depos+=ibalance; //deposit formula
+		cout<<"\n\n\t\tYour Balance Has Been Successfully Deposit\n\n"; //display your balance has been successfully deposit
+	
+	cout<<"\n\t\tHit \'0\' for Go to MainMenu:"; //hit 0 to go to mainmenu
+			cin>>go; //input option
+			if(go==0) //if user input is 0
+			{
+				menu(); //return to menu
+			}
+	}
+	
+	void Bank::checkbal() //void function for check balance
+	{
+		int passcode; //initialize variable passcode
+		cout<<"\n\t\tEnter your Account's Password: "; //display enter your account's password
+		cin>>passcode; //input passcode
+		if(pass==passcode) //if user input is the same as pass
+		{
+		int go;//initialize variable for option
+		cout<<"\n\t\tYour Current Balance:"<<" Rs."<<depos<<"\n"; //display your current balance
+		cout<<"\n\t\tHit \'0\' for Go to MainMenu:"; //display hit 0 to got to mainmenu
+			cin>>go; //input option
+			if(go==0) //if user input is 0
+			{
+				menu(); //return to menu
+			}
+		}
+		else //if user input is not equal to pass
+			cout<<"\n\t\tSorry You Entered Wrong Password!!TRY AGAIN@"; //display error message
+	}
+	
+	void Bank::withdraw() //void function for withdraw
+	{
+			int passcode; //initialize variable for passcode
+		cout<<"\n\t\tEnter your Account's Password: "; //display enter your account's password
+		cin>>passcode; //inout passcode
+		if(pass==passcode) //if user input is the same as pass
+		{
+		int go; //initialize variable option
+		cout<<"\n\t\tHow Much Money You wanna Withdraw:"; //display how much money you wanna withdraw
+		cin>>with; //input withdraw amount
+		depos-=with; //balance formula
+		cout<<"\n\t\tAfter Withdraw Your Balance:"<<" Rs."<<depos<<"\n"; //display your current balance
+		cout<<"\n\t\tHit \'0\' for Go to MainMenu:"; //display hit 0 to go to mainmenu
+			cin>>go; //input option
+			if(go==0) //if user input is 0
+			{
+				menu(); //return to menu
+			}
+		}
+		else //if user input is not equal to pass
+			cout<<"\n\t\tSorry You Entered Wrong Password!!TRY AGAIN"; //display error message
+	}
+	
+	void Bank::info() //void function for withdraw
+	{
+		int passcode; //initialize variable passcode
+		cout<<"\n\t\tEnter your Account's Password: "; //display enter your account's password
+		cin>>passcode; //input passcode
+		if(pass==passcode) //if user input is the same as pass
+		{
+		int go; //initialize variable for option
+		cout<<"\n\t\tAll Information is Listed Below:\n"; //display account information
+		cout<<"\t\t\tName of the Depositer:"<<name<<"\n"; //display name of the depositor
+		cout<<"\t\t\tName of the Account:"<<accname<<"\n"; //display name of the account
+		cout<<"\t\t\tType of the Account:"<<acctype<<"\n"; //display type of the account
+		cout<<"\t\t\tYour Current Amount:"<<depos<<"\n"; //display current balance
+		cout<<"\n\t\tHit \'0\' for Go to MainMenu:"; //display hit 0 to go to mainmenu
+			cin>>go; //input option
+			if(go==0) //if user input is 0
+			{
+				menu();//return to menu
+			}
+		}
+		else //if user input is not equal to pass
+			cout<<"\n\t\tSorry You Entered Wrong Password TRY AGAIN";//display error message
+	}
+	
+
+int main() 
+{
+	Bank Obj,ob1; 
+	fstream inout("Bank.txt",ios::in|ios::out); // create and read information for files
+    Obj.menu();
+    inout.write((char *)&Obj,sizeof(Obj));
+    inout.seekg(0,ios::beg);
+    inout.read((char *)&ob1,sizeof(ob1));
+    ob1.menu();
+	getch();  // to enable the characters from keyboard
+	return 0;
+}
